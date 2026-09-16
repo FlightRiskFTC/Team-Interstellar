@@ -106,3 +106,5 @@ TeamCode/build/intermediates/dex/debug/mergeLibDexDebug/11/classes.dex
 TeamCode/build/intermediates/dex/debug/mergeLibDexDebug/8/classes.dex
 TeamCode/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt
 TeamCode/build/outputs/apk/debug/TeamCode-debug.apk
+local.properties
+build/reports/problems/problems-report.html
