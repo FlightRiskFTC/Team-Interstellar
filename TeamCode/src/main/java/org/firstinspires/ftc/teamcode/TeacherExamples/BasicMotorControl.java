@@ -6,14 +6,13 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Disabled
 @TeleOp(name = "BasicMotorControl", group = "LinearOpMode")
 public class BasicMotorControl extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         //In some cases you only need two motors for tank drive, but in this case I have four
-        DcMotor frontleft = hardwareMap.get(DcMotor.class, "backleft");
-        DcMotor frontright = hardwareMap.get(DcMotor.class, "backright");
+        DcMotor frontleft = hardwareMap.get(DcMotor.class, "frontleft");
+        DcMotor frontright = hardwareMap.get(DcMotor.class, "frontright");
         DcMotor backleft = hardwareMap.get(DcMotor.class, "backleft");
         DcMotor backright = hardwareMap.get(DcMotor.class, "backright");
 
