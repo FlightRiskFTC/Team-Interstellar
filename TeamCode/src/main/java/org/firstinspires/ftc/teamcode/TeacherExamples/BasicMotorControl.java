@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+@Disabled
 @TeleOp(name = "BasicMotorControl", group = "LinearOpMode")
 public class BasicMotorControl extends LinearOpMode {
     @Override
@@ -30,8 +31,8 @@ public class BasicMotorControl extends LinearOpMode {
             axial = gamepad1.left_stick_y;
             yaw = gamepad1.right_stick_x;
 
-            double left = axial + yaw;
-            double right = axial - yaw;
+            double left = axial - yaw;
+            double right = axial + yaw;
 
             double max;
             //This makes sure the motors don't exceed 1.0/-1.0

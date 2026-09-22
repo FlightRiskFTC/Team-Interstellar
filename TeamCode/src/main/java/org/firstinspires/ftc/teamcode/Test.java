@@ -94,7 +94,7 @@ public class Test extends LinearOpMode {
                 lastA = gamepad1.dpad_up;
 
             if (fieldToggle) {
-            axial = y*cos(-heading) - x * sin(-heading);
+                axial = y*cos(-heading) - x * sin(-heading);
                 lateral = y *sin(-heading) + x*cos(-heading);
                 telemetry.addLine("Field Centric Toggled: On");
             }
