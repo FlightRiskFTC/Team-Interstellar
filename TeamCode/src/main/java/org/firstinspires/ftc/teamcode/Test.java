@@ -17,10 +17,24 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-@TeleOp(name = "Nathan's OpMode", group = "LinearOpMode")
+@TeleOp(name = "Test", group = "LinearOpMode")
 public class Test extends LinearOpMode {
 
     ElapsedTime Time = new ElapsedTime();
+
+    double heading = 0;
+    double x;
+    double y;
+    double moveSpeed = 1.0;
+
+    boolean lastA = false;
+    boolean fieldToggle = false;
+    boolean cycle = false;
+    double launcher = 0.0;
+
+    double axial;
+    double lateral;
+    double yaw;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -34,7 +48,6 @@ public class Test extends LinearOpMode {
         flywheel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         CRServo right_launch_servo = hardwareMap.get(CRServo.class, "rightServo");
         CRServo left_launch_servo = hardwareMap.get(CRServo.class, "leftServo");
-
 
         FRONT_L.setDirection(DcMotorSimple.Direction.FORWARD);
         FRONT_R.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -51,21 +64,8 @@ public class Test extends LinearOpMode {
         IMU.Parameters parameters = new IMU.Parameters(orientation);
         imu.initialize(parameters);
 
-        double heading = 0;
-        double x;
-        double y;
-        double moveSpeed = 1.0;
-
-        boolean lastA = false;
-        boolean fieldToggle = false;
-        boolean cycle = false;
-        double launcher = 0.0;
-
-        double axial;
-        double lateral;
-        double yaw;
-
         imu.resetYaw();
+        Time.reset();
 
         waitForStart();
         while(opModeIsActive()) {
@@ -109,6 +109,7 @@ public class Test extends LinearOpMode {
                 imu.resetYaw();
             }
 
+            telemetry.addLine("Press a to fire");
             if(gamepad1.a) {
                 if(flywheelVelocity <= 1500) {
                     right_launch_servo.setPower(0);
@@ -164,6 +165,12 @@ public class Test extends LinearOpMode {
                     }
                 }
                 }
+            else {
+                FRONT_R.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                FRONT_L.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                BACK_L.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                BACK_R.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            }
 
             double max;
             max = Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower));
@@ -182,12 +189,12 @@ public class Test extends LinearOpMode {
             BACK_R.setPower(backRightPower);
             BACK_L.setPower(backLeftPower);
             flywheel.setPower(launcher);
-
+            telemetry.addData("Status", "Run time: " + Time.toString());
             telemetry.addData("Front Wheel Power Right/Left", "%4.2f, %4.2f", frontRightPower, frontLeftPower);
             telemetry.addData("Back Wheel Power Right/Left", "%4.2f, %4.2f", backRightPower, backLeftPower);
             telemetry.addData("Current Rotation (Degrees)", "%.2f", heading);
             telemetry.update();
         }
     }
-    }
 
+}
